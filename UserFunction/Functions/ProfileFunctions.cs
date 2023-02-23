@@ -26,9 +26,9 @@ namespace UserFunction.Functions
             IProfileService service = DIContainer.Instance.GetService<IProfileService>();
 
             var envs = Environment.GetEnvironmentVariables();
-            foreach (var item in envs)
+            foreach (DictionaryEntry item in envs)
             {
-                log.LogInformation(item.ToString());
+                log.LogInformation($"{item.Key}: {item.Value}");
             }
 
             userId += Environment.GetEnvironmentVariable("CacheExpired");
