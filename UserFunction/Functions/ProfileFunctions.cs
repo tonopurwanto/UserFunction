@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using UserFunction.Domain;
 using UserFunction.Services;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace UserFunction.Functions
 {
@@ -22,6 +23,8 @@ namespace UserFunction.Functions
             log.LogInformation("C# HTTP trigger function processed a request.");
 
             IProfileService service = DIContainer.Instance.GetService<IProfileService>();
+
+            userId += Environment.GetEnvironmentVariable("CacheExpired");
 
             var result = service.GetProfile(userId);
 
