@@ -9,6 +9,7 @@ using UserFunction.Domain;
 using UserFunction.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Collections;
 
 namespace UserFunction.Functions
 {
@@ -23,6 +24,12 @@ namespace UserFunction.Functions
             log.LogInformation("C# HTTP trigger function processed a request.");
 
             IProfileService service = DIContainer.Instance.GetService<IProfileService>();
+
+            var envs = Environment.GetEnvironmentVariables();
+            foreach (var item in envs)
+            {
+                log.LogInformation(item.ToString());
+            }
 
             userId += Environment.GetEnvironmentVariable("CacheExpired");
 
